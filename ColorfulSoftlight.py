@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 import smbus
 import time
 import json
-import request
+import requests
 
 address = 0x48
 bus=smbus.SMBus(1)
@@ -51,7 +51,12 @@ def loop():
         p_Green.ChangeDutyCycle(value_Green*100/255)
         p_Blue.ChangeDutyCycle(value_Blue*100/255)
         # print read ADC value
-        out = { "g": value_Green, "r": value_Red,"b": value_Blue}
+        out = { "green": value_Green, "red": value_Red,"blue": value_Blue}
+        headers = { "Content-Type": "application/json", "Accept": "application/json" }
+        try:
+           r = requests.post(url = "http://192.168.0.58:8080/api/softlight", data = json.dumps(out), headers = headers)
+        except:
+            print("exception")
         
         print(json.dumps(out))
        
