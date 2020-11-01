@@ -51,10 +51,10 @@ def loop():
         p_Green.ChangeDutyCycle(value_Green*100/255)
         p_Blue.ChangeDutyCycle(value_Blue*100/255)
         # print read ADC value
-        out = { "green": value_Green, "red": value_Red,"blue": value_Blue}
+        out = { "green": 255-value_Green, "red": 255-value_Red,"blue": 255-value_Blue}
         headers = { "Content-Type": "application/json", "Accept": "application/json" }
         try:
-           r = requests.post(url = "http://192.168.0.58:8080/api/softlight", data = json.dumps(out), headers = headers)
+           r = requests.post(url = "http://ubuntu-far-edge:8080/api/softlight", data = json.dumps(out), headers = headers)
         except:
             print("exception")
         
