@@ -1,0 +1,9 @@
+[Unit]
+Description=SoftLightService
+
+[Service]
+TimeoutStartSec=0
+ExecStart=python3 /home/pi/softlight-iot/ColorfulSoftlight.py
+
+[Install]
+WantedBy=multi-user.target
